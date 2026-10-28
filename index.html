@@ -7,24 +7,53 @@
   <meta name="description" content="Vivian Tran — Information Technology student at George Mason University building practical AI, data and web tools." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Gaegu:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=7" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Space+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=11" />
 </head>
 <body>
-  <!-- Shared SVG filters: torn paper edges -->
+  <!-- Shared SVG filters -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <filter id="torn" x="-5%" y="-5%" width="110%" height="110%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="3" result="noise" />
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" />
+    <!-- torn edge (small pieces, illustrations) -->
+    <filter id="torn" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" seed="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
     </filter>
+    <!-- torn edge (cards) -->
+    <filter id="torn-card" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="5" seed="11" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <!-- white fibre edge that peeks out behind cards -->
+    <filter id="torn-fibre" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="5" seed="27" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <!-- big hero scraps -->
     <filter id="torn-big" x="-5%" y="-5%" width="110%" height="110%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="5" seed="8" result="noise" />
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="5" seed="8" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="26" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <!-- paper-cut look for the bunny: torn edge + fibre texture + shadow -->
+    <filter id="paper-cut" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="5" result="edge" />
+      <feDisplacementMap in="SourceGraphic" in2="edge" scale="9" xChannelSelector="R" yChannelSelector="G" result="cut" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="grain" />
+      <feDiffuseLighting in="grain" surfaceScale="1.4" lighting-color="#ffffff" result="lit">
+        <feDistantLight azimuth="45" elevation="58" />
+      </feDiffuseLighting>
+      <feComponentTransfer in="lit" result="soft">
+        <feFuncR type="linear" slope="0.22" intercept="0.8" />
+        <feFuncG type="linear" slope="0.22" intercept="0.8" />
+        <feFuncB type="linear" slope="0.22" intercept="0.8" />
+      </feComponentTransfer>
+      <feComposite in="soft" in2="cut" operator="arithmetic" k1="1" result="textured" />
+      <feComposite in="textured" in2="cut" operator="in" result="shape" />
+      <feDropShadow in="shape" dx="0" dy="4" stdDeviation="4" flood-color="#4a3328" flood-opacity="0.22" />
     </filter>
   </svg>
 
   <header class="nav">
-    <a href="#top" class="logo">vivian<span>.</span></a>
+    <a href="#top" class="logo">Vivian Tran</a>
     <nav>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span>
@@ -37,187 +66,222 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <a href="#contact" class="btn btn-primary">Let's talk</a>
+    <a href="#contact" class="btn btn-dark btn-sm">Contact</a>
   </header>
 
   <main id="top">
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-text">
-        <p class="eyebrow">IT student · AI &amp; web developer</p>
-        <h1>Vivian Tran<span class="dot">.</span>
-          <span class="h1-sub">I build thoughtful tools with <em>AI, data</em> and code.</span>
-        </h1>
-        <p class="lead">I'm an Information Technology student at George Mason University, concentrating in AI-Driven Solutions. I like taking messy problems and turning them into simple, reliable tools — with a little charm along the way.</p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">View my work →</a>
-          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      <div class="scrap s-butter"></div>
+      <div class="scrap s-white"></div>
+      <div class="scrap s-pink"></div>
+      <div class="scrap s-sage"></div>
+      <div class="scrap s-kraft"></div>
+
+      <div class="bunny-wrap">
+        <svg class="bunny" viewBox="0 0 400 470" role="img" aria-label="A paper-cut bunny illustration">
+          <g class="ear ear-l">
+            <g filter="url(#paper-cut)">
+              <path d="M150 210C112 160 104 60 130 26c22-28 52 4 58 54 6 48 2 100-8 134Z" fill="#fbf7f1" />
+              <path d="M152 186c-22-40-26-110-10-134 12-16 28 4 30 40 3 34 0 70-8 94Z" fill="#efb8c6" />
+            </g>
+          </g>
+          <g class="ear ear-r">
+            <g filter="url(#paper-cut)">
+              <path d="M250 210c38-50 46-150 20-184-22-28-52 4-58 54-6 48-2 100 8 134Z" fill="#fbf7f1" />
+              <path d="M248 186c22-40 26-110 10-134-12-16-28 4-30 40-3 34 0 70 8 94Z" fill="#efb8c6" />
+            </g>
+          </g>
+          <g filter="url(#paper-cut)">
+            <path d="M200 170c96 0 158 58 158 140 0 60-24 100-50 160H92C66 410 42 370 42 310c0-82 62-140 158-140Z" fill="#fbf7f1" />
+          </g>
+          <g filter="url(#torn)">
+            <ellipse cx="128" cy="322" rx="22" ry="13" fill="#f2c2cd" />
+            <ellipse cx="272" cy="322" rx="22" ry="13" fill="#f2c2cd" />
+          </g>
+          <g class="eye"><ellipse class="pupil" cx="152" cy="290" rx="11" ry="15" fill="#2a2522" /></g>
+          <g class="eye"><ellipse class="pupil" cx="248" cy="290" rx="11" ry="15" fill="#2a2522" /></g>
+          <path d="M190 318q10-8 20 0q-10 14-20 0Z" fill="#d97f95" filter="url(#torn)" />
+        </svg>
+        <div class="doodle doodle-burst" aria-hidden="true">
+          <svg viewBox="0 0 80 80"><path d="M14 30 4 22M30 14 26 2M50 18 58 6" /></svg>
         </div>
       </div>
 
-      <div class="hero-art">
-        <div class="hero-blob"></div>
-        <div class="hero-scrap"></div>
-        <div class="buddy-wrap">
-          <div class="bubble" aria-live="polite">hi! click me ♡</div>
-          <svg class="buddy" viewBox="0 0 400 400" role="img" aria-label="A friendly pink paper blob character">
-            <g filter="url(#torn-big)">
-              <path class="buddy-body" d="M200 40c80 0 150 50 160 140s-30 170-110 185S70 370 50 290 60 130 100 85 140 40 200 40Z" />
-              <path class="buddy-shade" d="M300 120c40 40 50 110 25 160-20 40-60 60-100 70 70-35 105-130 75-230Z" />
-            </g>
-            <g class="cheek" filter="url(#torn)"><ellipse cx="120" cy="240" rx="24" ry="14" /><ellipse cx="290" cy="240" rx="24" ry="14" /></g>
-            <g class="eye" data-eye>
-              <circle cx="145" cy="180" r="38" class="eye-white" filter="url(#torn)" />
-              <circle cx="145" cy="185" r="17" class="pupil" />
-            </g>
-            <g class="eye" data-eye>
-              <circle cx="265" cy="180" r="38" class="eye-white" filter="url(#torn)" />
-              <circle cx="265" cy="185" r="17" class="pupil" />
-            </g>
-            <path class="mouth" d="M180 250q25 35 50 0Z" filter="url(#torn)" />
-          </svg>
+      <div class="hero-card paper" style="--paper: var(--cream-light)">
+        <span class="tape tape-tl"></span>
+        <p class="eyebrow">IT · AI-Driven Solutions · George Mason University</p>
+        <h1>Vivian Tran</h1>
+        <p class="lead">Information Technology student building practical tools with AI, data and code.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-dark">View projects →</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
         </div>
       </div>
     </section>
 
     <!-- ABOUT -->
     <section id="about" class="section about">
-      <h2 class="section-title reveal"><span class="hand">a bit</span> About me</h2>
+      <div class="section-head reveal">
+        <span class="tape-label">About</span>
+      </div>
       <div class="about-grid">
-        <div class="paper about-photo reveal" style="--paper: var(--pink-200); --tilt: -3deg">
+        <figure class="paper polaroid reveal" style="--paper: var(--white); --tilt: -2.5deg">
           <span class="tape tape-top"></span>
-          <!-- Replace this illustration with <img src="me.jpg" alt="..."> if you like -->
-          <svg viewBox="0 0 200 220" class="portrait" aria-hidden="true">
-            <g filter="url(#torn)">
-              <circle cx="100" cy="95" r="70" fill="#3a2a2f" />
-              <circle cx="100" cy="105" r="52" fill="#fbe3d6" />
-              <path d="M48 90c10-40 90-50 104 0-20-15-40-25-104 0Z" fill="#3a2a2f" />
-              <path d="M30 220c0-50 30-70 70-70s70 20 70 70Z" fill="#e86f92" />
-            </g>
-            <circle cx="82" cy="108" r="5" fill="#3a2a2f" />
-            <circle cx="118" cy="108" r="5" fill="#3a2a2f" />
-            <ellipse cx="72" cy="122" rx="9" ry="5" fill="#f4a6bb" />
-            <ellipse cx="128" cy="122" rx="9" ry="5" fill="#f4a6bb" />
-            <path d="M92 126q8 8 16 0" stroke="#3a2a2f" stroke-width="3" fill="none" stroke-linecap="round" />
-          </svg>
-          <p class="caption hand">powered by boba &amp; curiosity</p>
-        </div>
+          <!-- Replace this illustration with <img src="me.jpg" alt="Vivian Tran"> if you like -->
+          <div class="polaroid-photo">
+            <svg viewBox="0 0 200 200" class="portrait" aria-hidden="true">
+              <rect width="200" height="200" fill="#f6dbe1" />
+              <g filter="url(#torn)">
+                <circle cx="100" cy="92" r="64" fill="#2a2522" />
+                <circle cx="100" cy="102" r="47" fill="#f8e2d6" />
+                <path d="M53 88c10-36 84-46 96 0-18-14-38-22-96 0Z" fill="#2a2522" />
+                <path d="M34 200c0-46 28-64 66-64s66 18 66 64Z" fill="#9fb293" />
+              </g>
+              <circle cx="84" cy="104" r="4.5" fill="#2a2522" />
+              <circle cx="116" cy="104" r="4.5" fill="#2a2522" />
+              <ellipse cx="74" cy="118" rx="8" ry="4.5" fill="#efb8c6" />
+              <ellipse cx="126" cy="118" rx="8" ry="4.5" fill="#efb8c6" />
+              <path d="M93 121q7 7 14 0" stroke="#2a2522" stroke-width="2.6" fill="none" stroke-linecap="round" />
+            </svg>
+          </div>
+          <figcaption>Springfield, VA</figcaption>
+        </figure>
 
-        <div class="paper about-text reveal" style="--paper: var(--white); --tilt: 1deg">
-          <p>I'm an IT student who enjoys building things people actually use — from fine-tuned language models to full-stack web apps and data tools.</p>
-          <p>At George Mason, I'm concentrating in <strong>AI-Driven Solutions</strong>, with coursework in applied generative AI, machine learning, data visualization and databases. My recent work includes fine-tuning Llama 3.2 with QLoRA and building an AI study companion powered by Google Gemini.</p>
-          <p>Outside the classroom, I teach kids to code and build robots at <strong>RoboThink</strong>, and I help run daily operations as an assistant manager. Both have taught me to explain technical ideas clearly and stay calm when things break.</p>
-          <ul class="facts">
-            <li><span>📍</span><span>Based in <strong>Springfield, VA</strong></span></li>
-            <li><span>🎓</span><span><strong>B.S. Information Technology</strong>, George Mason · May 2027</span></li>
-            <li><span>⭐</span><span><strong>3.95 GPA</strong></span></li>
-          </ul>
+        <div class="about-text reveal">
+          <h2>Hi, I'm Vivian.</h2>
+          <p>I'm studying Information Technology at George Mason University with a concentration in AI-Driven Solutions. My coursework spans applied generative AI, machine learning, data visualization and database design.</p>
+          <p>Recent work includes fine-tuning Llama 3.2 with QLoRA, building an AI study companion with Google Gemini and Supabase, and analyzing Fairfax County crime data in Python.</p>
+          <p>I also teach coding and robotics at RoboThink, where I've learned to explain technical ideas clearly and troubleshoot under pressure.</p>
+          <dl class="facts">
+            <div><dt>Degree</dt><dd>B.S. Information Technology</dd></div>
+            <div><dt>Graduating</dt><dd>May 2027</dd></div>
+            <div><dt>GPA</dt><dd>3.95</dd></div>
+          </dl>
         </div>
       </div>
     </section>
 
     <!-- EXPERIENCE -->
     <section id="experience" class="section experience">
-      <h2 class="section-title reveal"><span class="hand">where I've</span> Worked</h2>
-      <ol class="timeline">
-        <li class="paper job reveal" style="--paper: var(--white); --tilt: -1deg">
-          <span class="tape tape-top"></span>
-          <p class="job-date">May 2025 – Present</p>
-          <h3>Coding Instructor &amp; Technical Assistant</h3>
-          <p class="job-org">RoboThink</p>
-          <ul>
-            <li>Lead hands-on projects where students build robots with motors, wiring and sensors</li>
-            <li>Teach Python, block-based coding and robotics fundamentals</li>
-            <li>Troubleshoot and maintain laptops, networks and system operations, including Windows security updates</li>
-            <li>Run routine system checks to keep hardware and software working reliably</li>
-          </ul>
-        </li>
-        <li class="paper job reveal" style="--paper: var(--pink-100); --tilt: 0.8deg">
-          <span class="tape tape-top"></span>
-          <p class="job-date">Apr 2024 – Present</p>
-          <h3>Assistant Manager</h3>
-          <p class="job-org">Choong Man Chicken</p>
-          <ul>
-            <li>Manage daily operations, including staff coordination and customer service</li>
-            <li>Oversee inventory and streamline order processing</li>
-            <li>Train new employees and organize staff schedules with digital calendars</li>
-          </ul>
-        </li>
-        <li class="paper job reveal" style="--paper: var(--white); --tilt: -0.6deg">
-          <span class="tape tape-top"></span>
-          <p class="job-date">Aug 2021 – Jun 2023</p>
-          <h3>IT Tech Support</h3>
-          <p class="job-org">Falls Church High School</p>
-          <ul>
-            <li>Troubleshot software errors, updated systems and improved device performance</li>
-            <li>Set up classroom technology for teachers, including projectors, microphones and smart boards</li>
-            <li>Configured and repaired routers to restore network access</li>
-            <li>Designed flyers and digital announcements to promote school events</li>
-          </ul>
-        </li>
-        <li class="paper job reveal" style="--paper: var(--pink-200); --tilt: 1deg">
-          <span class="tape tape-top"></span>
-          <p class="job-date">Apr 2022 – Jun 2023</p>
-          <h3>Historian</h3>
-          <p class="job-org">Falls Church HS Vietnamese Student Association</p>
-          <ul>
-            <li>Designed and published Instagram content to promote events, using Canva and Photoshop</li>
-            <li>Coordinated marketing for joint events with other school organizations</li>
-            <li>Tracked engagement and refined content strategy</li>
-          </ul>
-        </li>
-      </ol>
+      <div class="section-head reveal">
+        <span class="tape-label">Experience</span>
+      </div>
+      <div class="paper sheet reveal" style="--paper: var(--white); --tilt: 0.4deg">
+        <span class="tape tape-tl"></span>
+        <span class="tape tape-tr"></span>
+        <ol class="timeline">
+          <li class="job">
+            <p class="job-date">May 2025 – Present</p>
+            <div>
+              <h3>Coding Instructor &amp; Technical Assistant</h3>
+              <p class="job-org">RoboThink</p>
+              <ul>
+                <li>Lead hands-on projects where students build robots with motors, wiring and sensors</li>
+                <li>Teach Python, block-based coding and robotics fundamentals</li>
+                <li>Troubleshoot and maintain laptops, networks and system operations, including Windows security updates</li>
+                <li>Run routine system checks to keep hardware and software working reliably</li>
+              </ul>
+            </div>
+          </li>
+          <li class="job">
+            <p class="job-date">Apr 2024 – Present</p>
+            <div>
+              <h3>Assistant Manager</h3>
+              <p class="job-org">Choong Man Chicken</p>
+              <ul>
+                <li>Manage daily operations, including staff coordination and customer service</li>
+                <li>Oversee inventory and streamline order processing</li>
+                <li>Train new employees and organize staff schedules with digital calendars</li>
+              </ul>
+            </div>
+          </li>
+          <li class="job">
+            <p class="job-date">Aug 2021 – Jun 2023</p>
+            <div>
+              <h3>IT Tech Support</h3>
+              <p class="job-org">Falls Church High School</p>
+              <ul>
+                <li>Troubleshot software errors, updated systems and improved device performance</li>
+                <li>Set up classroom technology for teachers, including projectors, microphones and smart boards</li>
+                <li>Configured and repaired routers to restore network access</li>
+                <li>Designed flyers and digital announcements to promote school events</li>
+              </ul>
+            </div>
+          </li>
+          <li class="job">
+            <p class="job-date">Apr 2022 – Jun 2023</p>
+            <div>
+              <h3>Historian</h3>
+              <p class="job-org">Falls Church HS Vietnamese Student Association</p>
+              <ul>
+                <li>Designed and published Instagram content to promote events, using Canva and Photoshop</li>
+                <li>Coordinated marketing for joint events with other school organizations</li>
+                <li>Tracked engagement and refined content strategy</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects" class="section projects">
-      <h2 class="section-title reveal"><span class="hand">things I've</span> Made</h2>
-
-      <div class="filters reveal" role="tablist" aria-label="Filter projects">
-        <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
-        <button class="chip" data-filter="ai" role="tab" aria-selected="false">AI</button>
-        <button class="chip" data-filter="web" role="tab" aria-selected="false">Web</button>
-        <button class="chip" data-filter="data" role="tab" aria-selected="false">Data &amp; Python</button>
+      <div class="section-head reveal">
+        <span class="tape-label">Projects</span>
+        <div class="filters" role="tablist" aria-label="Filter projects">
+          <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="chip" data-filter="ai" role="tab" aria-selected="false">AI</button>
+          <button class="chip" data-filter="web" role="tab" aria-selected="false">Web</button>
+          <button class="chip" data-filter="data" role="tab" aria-selected="false">Data &amp; Python</button>
+        </div>
       </div>
-
       <div class="project-grid" id="projectGrid"><!-- filled by script.js --></div>
     </section>
 
     <!-- SKILLS -->
     <section id="skills" class="section skills">
-      <h2 class="section-title reveal"><span class="hand">my sticker</span> Collection</h2>
-      <p class="hint reveal hand">(go ahead — drag them around!)</p>
-      <div class="sticker-board paper reveal" style="--paper: var(--pink-100)" id="stickerBoard">
+      <div class="section-head reveal">
+        <span class="tape-label">Skills</span>
+        <p class="hint">Drag to rearrange</p>
+      </div>
+      <div class="board paper reveal" style="--paper: var(--kraft-light)" id="stickerBoard">
         <!-- filled by script.js -->
       </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="section contact">
-      <div class="paper contact-card reveal" style="--paper: var(--pink-200); --tilt: -1deg">
-        <span class="tape tape-tl"></span>
-        <span class="tape tape-br"></span>
+      <div class="section-head reveal">
+        <span class="tape-label">Contact</span>
+      </div>
+      <div class="contact-grid reveal">
+        <div>
+          <h2>Get in touch</h2>
+          <p>The best way to reach me is by email. You can also find me on LinkedIn and GitHub.</p>
+          <div class="contact-actions">
+            <button class="btn btn-dark" id="copyEmail" data-email="viviantrran04@gmail.com">
+              <span class="btn-label">Copy email</span>
+            </button>
+            <a class="btn btn-ghost" href="mailto:viviantrran04@gmail.com">viviantrran04@gmail.com</a>
+          </div>
+          <ul class="socials">
+            <li><a href="https://www.linkedin.com/in/vivianptran04/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+            <li><a href="https://github.com/vivianptran" target="_blank" rel="noopener">GitHub ↗</a></li>
+          </ul>
+        </div>
         <div class="envelope" aria-hidden="true">
-          <svg viewBox="0 0 160 120">
-            <g filter="url(#torn)">
-              <rect x="10" y="20" width="140" height="90" rx="4" fill="#fffaf9" />
-              <path d="M10 22 80 72 150 22Z" fill="#f9c9d6" />
+          <svg viewBox="0 0 220 170">
+            <g filter="url(#paper-cut)">
+              <rect x="14" y="34" width="192" height="122" rx="3" fill="#fbf7f1" />
+              <path d="M14 36 110 104 206 36Z" fill="#a9b89a" />
             </g>
-            <path class="env-heart" d="M80 58c-8-10-22-4-16 8l16 14 16-14c6-12-8-18-16-8Z" fill="#e86f92" />
+            <g filter="url(#torn)">
+              <rect x="150" y="48" width="38" height="44" fill="#efb8c6" />
+              <rect x="156" y="54" width="26" height="32" fill="none" stroke="#fbf7f1" stroke-width="2" stroke-dasharray="3 3" />
+            </g>
           </svg>
         </div>
-        <h2>Let's build something<br /><span class="hand big">useful</span> together</h2>
-        <p>Have a project, an opportunity or just a question? I'd love to hear from you.</p>
-        <div class="contact-actions">
-          <button class="btn btn-primary" id="copyEmail" data-email="viviantrran04@gmail.com">
-            <span class="btn-label">Copy my email</span>
-          </button>
-          <a class="btn btn-ghost" href="mailto:viviantrran04@gmail.com">Send an email ✉</a>
-        </div>
-        <ul class="socials">
-          <li><a href="https://github.com/vivianptran" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/vivianptran04/" target="_blank" rel="noopener">LinkedIn</a></li>
-        </ul>
       </div>
     </section>
   </main>
@@ -230,19 +294,19 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="footer-mark"><span>vivian</span></div>
-    <p class="tiny">made with ♡ and lots of paper scraps · <span id="year"></span></p>
+    <div class="stamp"><span>Vivian Tran</span></div>
+    <p class="tiny">© <span id="year"></span></p>
   </footer>
 
   <!-- Project detail modal -->
   <dialog class="modal" id="projectModal">
-    <div class="paper modal-paper" style="--paper: var(--white)">
+    <div class="paper modal-paper" style="--paper: var(--cream-light)">
       <span class="tape tape-top"></span>
       <button class="modal-close" aria-label="Close">×</button>
       <div class="modal-body"></div>
     </div>
   </dialog>
 
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=11"></script>
 </body>
 </html>

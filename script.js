@@ -15,7 +15,6 @@ const PROJECTS = [
     ],
     tags: ["Lovable", "Google Gemini", "Supabase", "Prompt Engineering"],
     link: "",
-    color: "var(--pink-100)",
     art: "music",
   },
   {
@@ -31,7 +30,6 @@ const PROJECTS = [
     ],
     tags: ["QLoRA", "Llama 3.2", "Ollama", "Google Colab", "Kaggle"],
     link: "",
-    color: "var(--white)",
     art: "sparkle",
   },
   {
@@ -47,7 +45,6 @@ const PROJECTS = [
     ],
     tags: ["Python", "OOP"],
     link: "",
-    color: "var(--pink-200)",
     art: "cap",
   },
   {
@@ -63,7 +60,6 @@ const PROJECTS = [
     ],
     tags: ["HTML", "CSS", "JavaScript", "Dreamweaver"],
     link: "",
-    color: "var(--pink-50)",
     art: "flower",
   },
   {
@@ -79,7 +75,6 @@ const PROJECTS = [
     ],
     tags: ["Python", "CSV", "Data Analysis"],
     link: "",
-    color: "var(--white)",
     art: "chart",
   },
   {
@@ -95,7 +90,6 @@ const PROJECTS = [
     ],
     tags: ["MySQL", "ER Diagrams", "Database Design"],
     link: "",
-    color: "var(--pink-100)",
     art: "database",
   },
 ];
@@ -106,14 +100,6 @@ const SKILLS = [
   "Supabase", "Git & GitHub", "Lovable", "Tableau", "ArcGIS Pro", "Photoshop",
 ];
 
-const BUDDY_LINES = [
-  "thanks for stopping by ♡",
-  "I'm Vivian's paper sidekick!",
-  "ask her about agentic AI!",
-  "the skills below are draggable ↓",
-  "boop!",
-  "have a lovely day ✿",
-];
 
 // ---------- Paper-cutout illustrations ----------
 const ART = {
@@ -132,22 +118,21 @@ const ART = {
 const artSvg = (key) => `<svg class="project-art" viewBox="0 0 120 120" aria-hidden="true">${ART[key]}</svg>`;
 
 // ---------- Projects grid ----------
+const PAPERS = ["var(--pink-soft)", "var(--sage-soft)", "var(--butter-soft)", "var(--cream-light)"];
+const TILTS = [-1.2, 0.9, 0.7, -0.8, -0.6, 1.1];
 const grid = document.getElementById("projectGrid");
-grid.innerHTML = PROJECTS.map((p, i) => {
-  const tilt = [-1.5, 1.2, -0.8, 1.6, -1.2, 0.9][i % 6];
-  return `
-    <button class="project paper reveal" data-category="${p.categories.join(" ")}" data-index="${i}"
-      style="--paper:${p.color}; --tilt:${tilt}deg">
-      <span class="tape tape-top"></span>
-      ${artSvg(p.art)}
-      <span>
-        <span class="p-date">${p.date}</span>
-        <span class="p-title">${p.title}</span>
-        <span class="p-desc">${p.blurb}</span>
-        <span class="more">peek inside →</span>
-      </span>
-    </button>`;
-}).join("");
+grid.innerHTML = PROJECTS.map((p, i) => `
+  <button class="project paper reveal" data-category="${p.categories.join(" ")}" data-index="${i}"
+    style="--paper:${PAPERS[i % PAPERS.length]}; --tilt:${TILTS[i % TILTS.length]}deg">
+    <span class="tape tape-top"></span>
+    ${artSvg(p.art)}
+    <span>
+      <span class="p-date">${p.date}</span>
+      <span class="p-title">${p.title}</span>
+      <span class="p-desc">${p.blurb}</span>
+      <span class="more">Details</span>
+    </span>
+  </button>`).join("");
 
 // Filters
 document.querySelectorAll(".chip").forEach((chip) => {
@@ -176,28 +161,25 @@ grid.addEventListener("click", (e) => {
     <h3>${p.title}</h3>
     <div class="tags">${p.tags.map((t) => `<span>${t}</span>`).join("")}</div>
     <ul class="points">${p.points.map((pt) => `<li>${pt}</li>`).join("")}</ul>
-    ${p.link ? `<div style="text-align:center"><a class="btn btn-primary" href="${p.link}" target="_blank" rel="noopener">View project →</a></div>` : ""}`;
+    ${p.link ? `<a class="btn btn-dark" href="${p.link}" target="_blank" rel="noopener">View project →</a>` : ""}`;
   modal.showModal();
 });
 modal.querySelector(".modal-close").addEventListener("click", () => modal.close());
 modal.addEventListener("click", (e) => { if (e.target === modal) modal.close(); });
 
-// ---------- Buddy: eyes follow cursor, click to chat ----------
-const buddy = document.querySelector(".buddy");
-const bubble = document.querySelector(".bubble");
-const eyes = [...document.querySelectorAll("[data-eye]")];
-let lineIdx = 0;
+// ---------- Bunny: eyes follow the cursor, ears wiggle on click ----------
+const bunny = document.querySelector(".bunny");
+const eyes = [...document.querySelectorAll(".bunny .eye")];
 
 window.addEventListener("pointermove", (e) => {
   eyes.forEach((eye) => {
-    const white = eye.querySelector(".eye-white");
     const pupil = eye.querySelector(".pupil");
-    const r = white.getBoundingClientRect();
+    const r = eye.getBoundingClientRect();
     const dx = e.clientX - (r.left + r.width / 2);
     const dy = e.clientY - (r.top + r.height / 2);
     const angle = Math.atan2(dy, dx);
-    const dist = Math.min(14, Math.hypot(dx, dy) / 20);
-    pupil.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist - 5}px)`;
+    const dist = Math.min(6, Math.hypot(dx, dy) / 40);
+    pupil.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px)`;
   });
 });
 
@@ -209,56 +191,31 @@ function blink() {
   });
 }
 (function blinkLoop() {
-  setTimeout(() => { blink(); blinkLoop(); }, 2500 + Math.random() * 3000);
+  setTimeout(() => { blink(); blinkLoop(); }, 2800 + Math.random() * 3200);
 })();
 
-buddy.addEventListener("click", (e) => {
-  buddy.classList.remove("squish");
-  void buddy.getBBox();
-  buddy.classList.add("squish", "happy");
+bunny.addEventListener("click", () => {
+  bunny.classList.remove("wiggle");
+  void bunny.getBBox();
+  bunny.classList.add("wiggle");
   blink();
-  bubble.textContent = BUDDY_LINES[lineIdx++ % BUDDY_LINES.length];
-  bubble.classList.remove("pop");
-  void bubble.offsetWidth;
-  bubble.classList.add("pop");
-  heartBurst(e.clientX, e.clientY, 8);
-  clearTimeout(buddy._t);
-  buddy._t = setTimeout(() => buddy.classList.remove("happy"), 1200);
 });
 
-// ---------- Heart confetti ----------
-function heartBurst(x, y, n = 10) {
-  for (let i = 0; i < n; i++) {
-    const h = document.createElement("span");
-    h.className = "heart-bit";
-    h.textContent = ["♡", "♥", "✿", "✦"][i % 4];
-    const a = (Math.PI * 2 * i) / n + Math.random() * 0.5;
-    const d = 50 + Math.random() * 60;
-    h.style.left = `${x}px`;
-    h.style.top = `${y}px`;
-    h.style.setProperty("--dx", `${Math.cos(a) * d}px`);
-    h.style.setProperty("--dy", `${Math.sin(a) * d - 30}px`);
-    h.style.setProperty("--r", `${Math.random() * 120 - 60}deg`);
-    document.body.appendChild(h);
-    h.addEventListener("animationend", () => h.remove());
-  }
-}
-
-// ---------- Draggable stickers ----------
+// ---------- Draggable skill stickers ----------
 const board = document.getElementById("stickerBoard");
-const styles = ["", "s-pink", "s-rose", "s-blush"];
+const STICKER_STYLES = ["", "tone-pink", "tone-sage", "tone-butter"];
 SKILLS.forEach((name, i) => {
   const s = document.createElement("div");
-  s.className = `sticker ${styles[i % styles.length]}`;
+  s.className = `sticker ${STICKER_STYLES[i % STICKER_STYLES.length]}`;
   s.textContent = name;
-  s.style.rotate = `${Math.random() * 16 - 8}deg`;
+  s.style.rotate = `${Math.random() * 10 - 5}deg`;
   board.appendChild(s);
 });
 
 function scatterStickers() {
   // Flow stickers into rows that fit the board, then spread each row out with a little jitter
   const W = board.clientWidth;
-  const pad = 20, gapX = 18, rowH = 64;
+  const pad = 20, gapX = 18, rowH = 60;
   const rows = [[]];
   let x = pad;
   [...board.children].forEach((s) => {
@@ -267,7 +224,7 @@ function scatterStickers() {
     rows.at(-1).push(s);
     x += w + gapX;
   });
-  board.style.height = `${Math.max(380, rows.length * rowH + pad * 2)}px`;
+  board.style.height = `${Math.max(300, rows.length * rowH + pad * 2)}px`;
   const top = (board.clientHeight - rows.length * rowH) / 2;
   rows.forEach((row, r) => {
     const used = row.reduce((t, s) => t + s.offsetWidth, 0);
@@ -276,7 +233,7 @@ function scatterStickers() {
     row.forEach((s) => {
       const jx = Math.random() * Math.min(12, space / 2) - Math.min(6, space / 4);
       s.style.left = `${Math.max(4, Math.min(W - s.offsetWidth - 4, cx + jx))}px`;
-      s.style.top = `${top + r * rowH + 10 + Math.random() * 12 - 6}px`;
+      s.style.top = `${top + r * rowH + 10 + Math.random() * 10 - 5}px`;
       cx += s.offsetWidth + space;
     });
   });
@@ -295,14 +252,12 @@ board.addEventListener("pointerdown", (e) => {
   const startX = e.clientX - s.offsetLeft;
   const startY = e.clientY - s.offsetTop;
   const move = (ev) => {
-    const x = Math.max(0, Math.min(board.clientWidth - s.offsetWidth, ev.clientX - startX));
-    const y = Math.max(0, Math.min(board.clientHeight - s.offsetHeight, ev.clientY - startY));
-    s.style.left = `${x}px`;
-    s.style.top = `${y}px`;
+    s.style.left = `${Math.max(0, Math.min(board.clientWidth - s.offsetWidth, ev.clientX - startX))}px`;
+    s.style.top = `${Math.max(0, Math.min(board.clientHeight - s.offsetHeight, ev.clientY - startY))}px`;
   };
   const up = () => {
     s.classList.remove("dragging");
-    s.style.rotate = `${Math.random() * 16 - 8}deg`;
+    s.style.rotate = `${Math.random() * 10 - 5}deg`;
     s.removeEventListener("pointermove", move);
     s.removeEventListener("pointerup", up);
   };
@@ -312,16 +267,15 @@ board.addEventListener("pointerdown", (e) => {
 
 // ---------- Copy email ----------
 const copyBtn = document.getElementById("copyEmail");
-copyBtn.addEventListener("click", async (e) => {
+copyBtn.addEventListener("click", async () => {
   const label = copyBtn.querySelector(".btn-label");
   try {
     await navigator.clipboard.writeText(copyBtn.dataset.email);
-    label.textContent = "Copied! ♡";
+    label.textContent = "Copied";
   } catch {
     label.textContent = copyBtn.dataset.email;
   }
-  heartBurst(e.clientX, e.clientY, 12);
-  setTimeout(() => (label.textContent = "Copy my email"), 2200);
+  setTimeout(() => (label.textContent = "Copy email"), 2000);
 });
 
 // ---------- Scroll reveal + active nav ----------
