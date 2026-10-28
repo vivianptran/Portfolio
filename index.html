@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Space+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=18" />
+  <link rel="stylesheet" href="styles.css?v=20" />
 </head>
 <body>
   <!-- Shared SVG filters -->
@@ -158,36 +158,40 @@
                 <span class="tape tape-top"></span>
                 <div class="polaroid-photo">
                   <svg viewBox="0 0 300 300" class="collage" role="img" aria-label="Paper-collage portrait of Vivian">
-                    <rect width="300" height="300" fill="#f6dbe1" />
+                    <rect width="300" height="300" fill="#f7dde3" />
                     <!-- background scraps -->
-                    <path filter="url(#paper-cut)" d="M-10 196 96 176 132 312H-10Z" fill="#ecd9a0" />
-                    <path filter="url(#paper-cut)" d="M206 -10h104v128l-84 18Z" fill="#b4c2a5" />
-                    <path filter="url(#paper-cut)" d="M-10 -10h96l-26 60-70 10Z" fill="#fbf7f1" />
+                    <path filter="url(#paper-cut-soft)" d="M206 -10h104v86c-30 10-62 4-90-10Z" fill="#ecd9a0" />
+                    <path filter="url(#paper-cut-soft)" d="M-10 226c34-10 66-4 92 14l-6 70H-10Z" fill="#b4c2a5" />
+                    <circle filter="url(#paper-cut-soft)" cx="150" cy="150" r="100" fill="#fbf7f1" />
                     <!-- hair (back) -->
-                    <path filter="url(#paper-cut-soft)" d="M150 52c-46 0-66 32-68 82-2 46-4 92-12 140-2 14 8 26 22 26h116c14 0 24-12 22-26-8-48-10-94-12-140-2-50-22-82-68-82Z" fill="#2b1f1c" />
-                    <!-- neck + chest -->
-                    <path filter="url(#torn)" d="M134 168h32l4 34c10 4 24 8 30 14v46H100v-46c6-6 20-10 30-14Z" fill="#eab79a" />
-                    <!-- sweater with square neckline -->
-                    <path filter="url(#paper-cut)" d="M54 300c2-46 16-74 50-88l8-2v44h76v-44l8 2c34 14 48 42 50 88Z" fill="#fbf7f1" />
-                    <path d="M112 254h76" stroke="#e7e1d6" stroke-width="3" />
-                    <!-- face -->
-                    <ellipse filter="url(#paper-cut-soft)" cx="150" cy="124" rx="37" ry="46" fill="#f0c2a4" />
-                    <!-- front hair framing the face, centre part -->
-                    <path filter="url(#paper-cut-soft)" d="M150 72c-28 0-42 22-44 52-2 38-6 80-14 124-2 12 4 22 14 24 2-50 6-96 10-136 4-30 16-56 34-64Z" fill="#2b1f1c" />
-                    <path filter="url(#paper-cut-soft)" d="M150 72c28 0 42 22 44 52 2 38 6 80 14 124 2 12-4 22-14 24-2-50-6-96-10-136-4-30-16-56-34-64Z" fill="#2b1f1c" />
-                    <!-- features -->
-                    <path d="M126 108q10-5 18 0M156 108q8-5 18 0" stroke="#2b1f1c" stroke-width="2.4" fill="none" stroke-linecap="round" />
-                    <ellipse cx="135" cy="119" rx="4.6" ry="3.4" fill="#2b1f1c" />
-                    <ellipse cx="165" cy="119" rx="4.6" ry="3.4" fill="#2b1f1c" />
-                    <ellipse filter="url(#torn)" cx="124" cy="137" rx="10" ry="6" fill="#ea9fa6" opacity="0.85" />
-                    <ellipse filter="url(#torn)" cx="176" cy="137" rx="10" ry="6" fill="#ea9fa6" opacity="0.85" />
-                    <path d="M147 124q3 9 6 0" stroke="#c98a73" stroke-width="2" fill="none" stroke-linecap="round" />
-                    <path filter="url(#torn)" d="M139 148q11-5 22 0q-11 10-22 0Z" fill="#c8605f" />
+                    <path filter="url(#paper-cut-soft)" d="M150 60c-56 0-82 40-82 94v96c0 24 16 42 40 42h84c24 0 40-18 40-42v-96c0-54-26-94-82-94Z" fill="#2e211e" />
+                    <!-- shoulders: white square-neck sweater -->
+                    <path filter="url(#paper-cut-soft)" d="M84 302c0-42 26-64 66-64s66 22 66 64Z" fill="#ffffff" />
+                    <path d="M134 238h32v18h-32Z" fill="#f3c9ad" />
+                    <rect x="140" y="196" width="20" height="46" rx="8" fill="#f3c9ad" />
                     <!-- gold V necklace -->
-                    <path d="M130 196q20 16 40 0" stroke="#c9a24a" stroke-width="1.6" fill="none" />
-                    <path d="M146 204l4 9 4-9" stroke="#c9a24a" stroke-width="2.2" fill="none" stroke-linejoin="round" />
-                    <!-- doodles -->
-                    <path d="M238 168l10-6M244 184l12 0M236 152l6-10" stroke="#2a2522" stroke-width="3.5" stroke-linecap="round" />
+                    <path d="M136 236q14 12 28 0" stroke="#c9a24a" stroke-width="1.4" fill="none" />
+                    <path d="M147 242l3 6 3-6" stroke="#c9a24a" stroke-width="2" fill="none" stroke-linejoin="round" />
+                    <!-- face -->
+                    <ellipse filter="url(#paper-cut-soft)" cx="150" cy="146" rx="50" ry="48" fill="#f6d2b8" />
+                    <!-- front hair: soft centre part framing the face -->
+                    <path filter="url(#paper-cut-soft)" d="M98 150C96 104 118 78 150 76c32 2 54 28 52 74-8-28-26-46-48-50l-4 6-4-6c-22 4-40 22-48 50Z" fill="#2e211e" />
+                    <path filter="url(#paper-cut-soft)" d="M150 82c-26 4-46 24-50 56-3 26-3 52-12 76 16-8 22-34 24-60 2-30 14-56 38-72Z" fill="#2e211e" />
+                    <path filter="url(#paper-cut-soft)" d="M150 82c26 4 46 24 50 56 3 26 3 52 12 76-16-8-22-34-24-60-2-30-14-56-38-72Z" fill="#2e211e" />
+                    <!-- eyes with sparkle -->
+                    <ellipse cx="130" cy="152" rx="6.5" ry="8" fill="#2a1d1a" />
+                    <ellipse cx="170" cy="152" rx="6.5" ry="8" fill="#2a1d1a" />
+                    <circle cx="128" cy="149" r="2.3" fill="#fff" />
+                    <circle cx="168" cy="149" r="2.3" fill="#fff" />
+                    <path d="M124 145l-4-3M176 145l4-3" stroke="#2a1d1a" stroke-width="2" stroke-linecap="round" />
+                    <!-- blush + smile -->
+                    <ellipse filter="url(#torn)" cx="116" cy="168" rx="11" ry="6.5" fill="#f2a5b4" opacity="0.85" />
+                    <ellipse filter="url(#torn)" cx="184" cy="168" rx="11" ry="6.5" fill="#f2a5b4" opacity="0.85" />
+                    <path d="M143 172q7 7 14 0" stroke="#c25a63" stroke-width="2.6" fill="none" stroke-linecap="round" />
+                    <!-- doodles, mirrored so she stays centred -->
+                    <path d="M58 58v18M49 67h18M242 58v18M233 67h18" stroke="#2a2522" stroke-width="2.6" stroke-linecap="round" />
+                    <path filter="url(#torn)" d="M46 128c-4-6-13-2-10 5l10 9 10-9c3-7-6-11-10-5Z" fill="#d97f95" />
+                    <path filter="url(#torn)" d="M254 128c-4-6-13-2-10 5l10 9 10-9c3-7-6-11-10-5Z" fill="#d97f95" />
                   </svg>
                 </div>
                 <figcaption>Cut &amp; pasted</figcaption>
@@ -356,6 +360,6 @@
     </div>
   </dialog>
 
-  <script src="script.js?v=18"></script>
+  <script src="script.js?v=20"></script>
 </body>
 </html>
