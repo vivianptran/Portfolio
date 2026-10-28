@@ -166,7 +166,7 @@ h1, h2, h3 { letter-spacing: -0.035em; line-height: 1.1; }
 
 .bunny-wrap {
   position: absolute;
-  right: 6%;
+  right: max(6%, calc(50% - 600px));
   bottom: -4px;
   width: min(48%, 560px, 74vh);
   aspect-ratio: 400 / 470;
@@ -187,7 +187,7 @@ h1, h2, h3 { letter-spacing: -0.035em; line-height: 1.1; }
 .hero-card {
   position: absolute;
   z-index: 4;
-  left: clamp(16px, 6vw, 96px);
+  left: max(clamp(16px, 6vw, 96px), calc(50% - 560px));
   bottom: 13%;
   max-width: 440px;
   padding: 2.2rem 2.2rem 2rem;
