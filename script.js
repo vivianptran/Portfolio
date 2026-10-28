@@ -101,9 +101,9 @@ const PROJECTS = [
 ];
 
 const SKILLS = [
-  "Python", "Java", "HTML", "CSS", "JavaScript", "Node.js",
-  "SQL (MySQL)", "Supabase", "Git & GitHub", "Prompt Engineering", "QLoRA Fine-Tuning", "Google Gemini",
-  "Ollama", "Lovable", "Tableau", "ArcGIS Pro", "Jupyter", "Photoshop",
+  "Agentic AI", "Claude Code", "Prompt Engineering", "QLoRA Fine-Tuning", "Google Gemini", "Ollama",
+  "Python", "Java", "JavaScript", "HTML & CSS", "Node.js", "SQL (MySQL)",
+  "Supabase", "Git & GitHub", "Lovable", "Tableau", "ArcGIS Pro", "Photoshop",
 ];
 
 const BUDDY_LINES = [
