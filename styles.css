@@ -36,8 +36,8 @@ body {
   background-color: var(--cream);
   background-image: var(--tex);
   background-blend-mode: multiply;
-  overflow-x: hidden;
 }
+main { overflow-x: clip; }
 a { color: inherit; }
 img, svg { display: block; max-width: 100%; }
 h1, h2, h3 { letter-spacing: -0.035em; line-height: 1.1; }
@@ -418,6 +418,8 @@ h1 { font-size: clamp(2.7rem, 5.4vw, 4.2rem); font-weight: 800; margin: 0 0 0.5r
   .section { padding: 4rem 16px; }
   .hero-card { padding: 1.8rem 1.4rem 1.6rem; }
   .sheet { padding: 0.6rem 1.4rem; }
+  .tape-tl { left: -6px; }
+  .tape-tr { right: -6px; }
   .project { grid-template-columns: 72px 1fr; padding: 2rem 1.3rem 1.6rem; }
   .project-art { width: 72px; }
   .sticker { font-size: 0.8rem; padding: 0.42em 0.8em; }
