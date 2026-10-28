@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vivian — Portfolio</title>
+  <meta name="description" content="Hi, I'm Vivian! A little corner of the internet for my projects, skills and things I love making." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=Gaegu:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Shared SVG filters: torn paper edges -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="torn" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <filter id="torn-big" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="5" seed="8" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
+  <header class="nav">
+    <a href="#top" class="logo">vivian<span>.</span></a>
+    <nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="btn btn-dark">Say hi ♡</a>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="scrap scrap-1"></div>
+      <div class="scrap scrap-2"></div>
+      <div class="scrap scrap-3"></div>
+      <div class="scrap scrap-4"></div>
+
+      <div class="buddy-wrap">
+        <div class="bubble" aria-live="polite">psst… click me!</div>
+        <svg class="buddy" viewBox="0 0 400 400" role="img" aria-label="A cute pink paper blob character">
+          <g filter="url(#torn-big)">
+            <path class="buddy-body" d="M200 40c80 0 150 50 160 140s-30 170-110 185S70 370 50 290 60 130 100 85 140 40 200 40Z" />
+            <path class="buddy-shade" d="M300 120c40 40 50 110 25 160-20 40-60 60-100 70 70-35 105-130 75-230Z" />
+          </g>
+          <g class="cheek" filter="url(#torn)"><ellipse cx="120" cy="240" rx="24" ry="14" /><ellipse cx="290" cy="240" rx="24" ry="14" /></g>
+          <g class="eye" data-eye>
+            <circle cx="145" cy="180" r="38" class="eye-white" filter="url(#torn)" />
+            <circle cx="145" cy="185" r="17" class="pupil" />
+          </g>
+          <g class="eye" data-eye>
+            <circle cx="265" cy="180" r="38" class="eye-white" filter="url(#torn)" />
+            <circle cx="265" cy="185" r="17" class="pupil" />
+          </g>
+          <path class="mouth" d="M180 250q25 35 50 0Z" filter="url(#torn)" />
+        </svg>
+        <div class="doodle-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+
+      <div class="hero-card paper" style="--paper: var(--white)">
+        <span class="tape tape-tl"></span>
+        <p class="kicker">hello there, I'm</p>
+        <h1>Vivian<span class="dot">.</span><br /><span class="h1-sub">I make cute,<br />useful things.</span></h1>
+        <p class="lead">Designer &amp; developer who loves soft colors, tidy code, and tiny details that make people smile.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-dark">See my work →</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">scroll ↓</div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about">
+      <h2 class="section-title reveal"><span class="hand">a bit</span> About me</h2>
+      <div class="about-grid">
+        <div class="paper about-photo reveal" style="--paper: var(--pink-200); --tilt: -3deg">
+          <span class="tape tape-top"></span>
+          <!-- Replace this illustration with <img src="me.jpg" alt="..."> if you like -->
+          <svg viewBox="0 0 200 220" class="portrait" aria-hidden="true">
+            <g filter="url(#torn)">
+              <circle cx="100" cy="95" r="70" fill="#3a2a2f" />
+              <circle cx="100" cy="105" r="52" fill="#fbe3d6" />
+              <path d="M48 90c10-40 90-50 104 0-20-15-40-25-104 0Z" fill="#3a2a2f" />
+              <path d="M30 220c0-50 30-70 70-70s70 20 70 70Z" fill="#e86f92" />
+            </g>
+            <circle cx="82" cy="108" r="5" fill="#3a2a2f" />
+            <circle cx="118" cy="108" r="5" fill="#3a2a2f" />
+            <ellipse cx="72" cy="122" rx="9" ry="5" fill="#f4a6bb" />
+            <ellipse cx="128" cy="122" rx="9" ry="5" fill="#f4a6bb" />
+            <path d="M92 126q8 8 16 0" stroke="#3a2a2f" stroke-width="3" fill="none" stroke-linecap="round" />
+          </svg>
+          <p class="caption hand">me, probably sipping boba</p>
+        </div>
+
+        <div class="paper about-text reveal" style="--paper: var(--white); --tilt: 1deg">
+          <p>Hi! I'm Vivian — a creative developer who believes the internet should feel a little more <em>handmade</em>.</p>
+          <p>I design and build websites, apps and small tools with a focus on clarity, accessibility and joy. When I'm not coding, you'll find me sketching, collecting stationery, or hunting for the perfect café.</p>
+          <ul class="facts">
+            <li><span>📍</span> Based in <strong>your city</strong></li>
+            <li><span>🎓</span> Studying <strong>your major</strong></li>
+            <li><span>✨</span> Currently <strong>open to opportunities</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section projects">
+      <h2 class="section-title reveal"><span class="hand">things I've</span> Made</h2>
+
+      <div class="filters reveal" role="tablist" aria-label="Filter projects">
+        <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="chip" data-filter="web" role="tab" aria-selected="false">Web</button>
+        <button class="chip" data-filter="design" role="tab" aria-selected="false">Design</button>
+        <button class="chip" data-filter="app" role="tab" aria-selected="false">Apps</button>
+      </div>
+
+      <div class="project-grid" id="projectGrid"><!-- filled by script.js --></div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section skills">
+      <h2 class="section-title reveal"><span class="hand">my sticker</span> Collection</h2>
+      <p class="hint reveal hand">(go ahead — drag them around!)</p>
+      <div class="sticker-board paper reveal" style="--paper: var(--pink-100)" id="stickerBoard">
+        <!-- filled by script.js -->
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <div class="paper contact-card reveal" style="--paper: var(--pink-200); --tilt: -1deg">
+        <span class="tape tape-tl"></span>
+        <span class="tape tape-br"></span>
+        <div class="envelope" aria-hidden="true">
+          <svg viewBox="0 0 160 120">
+            <g filter="url(#torn)">
+              <rect x="10" y="20" width="140" height="90" rx="4" fill="#fffaf9" />
+              <path d="M10 22 80 72 150 22Z" fill="#f9c9d6" />
+            </g>
+            <path class="env-heart" d="M80 58c-8-10-22-4-16 8l16 14 16-14c6-12-8-18-16-8Z" fill="#e86f92" />
+          </svg>
+        </div>
+        <h2>Let's make something<br /><span class="hand big">sweet</span> together</h2>
+        <p>Have a project, a question, or just want to say hi? My inbox is always open.</p>
+        <div class="contact-actions">
+          <button class="btn btn-dark" id="copyEmail" data-email="hello@example.com">
+            <span class="btn-label">Copy my email</span>
+          </button>
+          <a class="btn btn-ghost" href="mailto:hello@example.com">Send a note ✉</a>
+        </div>
+        <ul class="socials">
+          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://dribbble.com/" target="_blank" rel="noopener">Dribbble</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-mark"><span>vivian</span></div>
+    <p class="tiny">made with ♡ and lots of paper scraps · <span id="year"></span></p>
+  </footer>
+
+  <!-- Project detail modal -->
+  <dialog class="modal" id="projectModal">
+    <div class="paper modal-paper" style="--paper: var(--white)">
+      <span class="tape tape-top"></span>
+      <button class="modal-close" aria-label="Close">×</button>
+      <div class="modal-body"></div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
