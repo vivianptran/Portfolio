@@ -201,6 +201,21 @@ bunny.addEventListener("click", () => {
   blink();
 });
 
+// ---------- Flip the About photo to its paper-collage side ----------
+const flipCard = document.getElementById("flipCard");
+const flipHint = document.querySelector(".flip-hint");
+function flip() {
+  const flipped = flipCard.classList.toggle("flipped");
+  flipCard.setAttribute("aria-pressed", flipped);
+  flipCard.querySelector(".side-front").setAttribute("aria-hidden", flipped);
+  flipCard.querySelector(".side-back").setAttribute("aria-hidden", !flipped);
+  flipHint.textContent = flipped ? "Click to flip back" : "Click the photo to flip";
+}
+flipCard.addEventListener("click", flip);
+flipCard.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); }
+});
+
 // ---------- Draggable skill stickers ----------
 const board = document.getElementById("stickerBoard");
 const STICKER_STYLES = ["", "tone-pink", "tone-sage", "tone-butter"];

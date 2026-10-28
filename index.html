@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Space+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=16" />
+  <link rel="stylesheet" href="styles.css?v=18" />
 </head>
 <body>
   <!-- Shared SVG filters -->
@@ -49,6 +49,22 @@
       <feComposite in="soft" in2="cut" operator="arithmetic" k1="1" result="textured" />
       <feComposite in="textured" in2="cut" operator="in" result="shape" />
       <feDropShadow in="shape" dx="0" dy="4" stdDeviation="4" flood-color="#4a3328" flood-opacity="0.22" />
+    </filter>
+    <filter id="paper-cut-soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="9" result="edge" />
+      <feDisplacementMap in="SourceGraphic" in2="edge" scale="4" xChannelSelector="R" yChannelSelector="G" result="cut" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="grain" />
+      <feDiffuseLighting in="grain" surfaceScale="1.4" lighting-color="#ffffff" result="lit">
+        <feDistantLight azimuth="45" elevation="58" />
+      </feDiffuseLighting>
+      <feComponentTransfer in="lit" result="soft">
+        <feFuncR type="linear" slope="0.22" intercept="0.8" />
+        <feFuncG type="linear" slope="0.22" intercept="0.8" />
+        <feFuncB type="linear" slope="0.22" intercept="0.8" />
+      </feComponentTransfer>
+      <feComposite in="soft" in2="cut" operator="arithmetic" k1="1" result="textured" />
+      <feComposite in="textured" in2="cut" operator="in" result="shape" />
+      <feDropShadow in="shape" dx="0" dy="3" stdDeviation="3" flood-color="#4a3328" flood-opacity="0.22" />
     </filter>
   </svg>
 
@@ -126,13 +142,60 @@
         <span class="tape-label">About</span>
       </div>
       <div class="about-grid">
-        <figure class="paper polaroid reveal" style="--paper: var(--white); --tilt: -2.5deg">
-          <span class="tape tape-top"></span>
-          <div class="polaroid-photo">
-            <img src="images/vivian.jpg?v=5" alt="Portrait of Vivian Tran" width="760" height="760" loading="lazy" decoding="async" />
+        <div class="flip-wrap reveal">
+          <div class="flip-card" id="flipCard" role="button" tabindex="0" aria-pressed="false" aria-label="Flip the photo to see a paper-collage version">
+            <div class="flip-inner">
+              <!-- Front: photo -->
+              <figure class="paper polaroid side side-front" style="--paper: var(--white)">
+                <span class="tape tape-top"></span>
+                <div class="polaroid-photo">
+                  <img src="images/vivian.jpg?v=6" alt="Portrait of Vivian Tran" width="900" height="900" loading="lazy" decoding="async" />
+                </div>
+                <figcaption>Springfield, VA</figcaption>
+              </figure>
+              <!-- Back: paper-collage portrait -->
+              <figure class="paper polaroid side side-back" style="--paper: var(--white)" aria-hidden="true">
+                <span class="tape tape-top"></span>
+                <div class="polaroid-photo">
+                  <svg viewBox="0 0 300 300" class="collage" role="img" aria-label="Paper-collage portrait of Vivian">
+                    <rect width="300" height="300" fill="#f6dbe1" />
+                    <!-- background scraps -->
+                    <path filter="url(#paper-cut)" d="M-10 196 96 176 132 312H-10Z" fill="#ecd9a0" />
+                    <path filter="url(#paper-cut)" d="M206 -10h104v128l-84 18Z" fill="#b4c2a5" />
+                    <path filter="url(#paper-cut)" d="M-10 -10h96l-26 60-70 10Z" fill="#fbf7f1" />
+                    <!-- hair (back) -->
+                    <path filter="url(#paper-cut-soft)" d="M150 52c-46 0-66 32-68 82-2 46-4 92-12 140-2 14 8 26 22 26h116c14 0 24-12 22-26-8-48-10-94-12-140-2-50-22-82-68-82Z" fill="#2b1f1c" />
+                    <!-- neck + chest -->
+                    <path filter="url(#torn)" d="M134 168h32l4 34c10 4 24 8 30 14v46H100v-46c6-6 20-10 30-14Z" fill="#eab79a" />
+                    <!-- sweater with square neckline -->
+                    <path filter="url(#paper-cut)" d="M54 300c2-46 16-74 50-88l8-2v44h76v-44l8 2c34 14 48 42 50 88Z" fill="#fbf7f1" />
+                    <path d="M112 254h76" stroke="#e7e1d6" stroke-width="3" />
+                    <!-- face -->
+                    <ellipse filter="url(#paper-cut-soft)" cx="150" cy="124" rx="37" ry="46" fill="#f0c2a4" />
+                    <!-- front hair framing the face, centre part -->
+                    <path filter="url(#paper-cut-soft)" d="M150 72c-28 0-42 22-44 52-2 38-6 80-14 124-2 12 4 22 14 24 2-50 6-96 10-136 4-30 16-56 34-64Z" fill="#2b1f1c" />
+                    <path filter="url(#paper-cut-soft)" d="M150 72c28 0 42 22 44 52 2 38 6 80 14 124 2 12-4 22-14 24-2-50-6-96-10-136-4-30-16-56-34-64Z" fill="#2b1f1c" />
+                    <!-- features -->
+                    <path d="M126 108q10-5 18 0M156 108q8-5 18 0" stroke="#2b1f1c" stroke-width="2.4" fill="none" stroke-linecap="round" />
+                    <ellipse cx="135" cy="119" rx="4.6" ry="3.4" fill="#2b1f1c" />
+                    <ellipse cx="165" cy="119" rx="4.6" ry="3.4" fill="#2b1f1c" />
+                    <ellipse filter="url(#torn)" cx="124" cy="137" rx="10" ry="6" fill="#ea9fa6" opacity="0.85" />
+                    <ellipse filter="url(#torn)" cx="176" cy="137" rx="10" ry="6" fill="#ea9fa6" opacity="0.85" />
+                    <path d="M147 124q3 9 6 0" stroke="#c98a73" stroke-width="2" fill="none" stroke-linecap="round" />
+                    <path filter="url(#torn)" d="M139 148q11-5 22 0q-11 10-22 0Z" fill="#c8605f" />
+                    <!-- gold V necklace -->
+                    <path d="M130 196q20 16 40 0" stroke="#c9a24a" stroke-width="1.6" fill="none" />
+                    <path d="M146 204l4 9 4-9" stroke="#c9a24a" stroke-width="2.2" fill="none" stroke-linejoin="round" />
+                    <!-- doodles -->
+                    <path d="M238 168l10-6M244 184l12 0M236 152l6-10" stroke="#2a2522" stroke-width="3.5" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <figcaption>Cut &amp; pasted</figcaption>
+              </figure>
+            </div>
           </div>
-          <figcaption>Springfield, VA</figcaption>
-        </figure>
+          <p class="flip-hint">Click the photo to flip</p>
+        </div>
 
         <div class="about-text reveal">
           <h2>Hi, I'm Vivian.</h2>
@@ -293,6 +356,6 @@
     </div>
   </dialog>
 
-  <script src="script.js?v=16"></script>
+  <script src="script.js?v=18"></script>
 </body>
 </html>

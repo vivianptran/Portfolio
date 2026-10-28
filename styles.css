@@ -206,7 +206,17 @@ h1 { font-size: clamp(2.7rem, 5.4vw, 4.2rem); font-weight: 800; margin: 0 0 0.5r
 
 /* About */
 .about-grid { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 4.5rem; align-items: center; }
-.polaroid { margin: 0; padding: 14px 14px 0; max-width: 320px; justify-self: center; }
+.flip-wrap { width: 100%; max-width: 320px; justify-self: center; text-align: center; }
+.flip-card { perspective: 1400px; cursor: pointer; transform: rotate(-2.5deg); outline-offset: 8px; }
+.flip-inner { position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(.3, 1.25, .5, 1); }
+.flip-card:hover .flip-inner { transform: rotateY(-8deg); }
+.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-card.flipped:hover .flip-inner { transform: rotateY(172deg); }
+.side { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.side-back { position: absolute; inset: 0; transform: rotateY(180deg); }
+.flip-hint { margin: 1.1rem 0 0; font: 0.68rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
+.polaroid { margin: 0; padding: 14px 14px 0; }
+.collage { width: 100%; height: auto; }
 .polaroid-photo { overflow: hidden; }
 .polaroid-photo img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
 .polaroid figcaption { padding: 0.9rem 0 1rem; text-align: center; font: 0.75rem var(--mono); letter-spacing: 0.06em; color: var(--ink-soft); }
