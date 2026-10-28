@@ -109,7 +109,6 @@ const SKILLS = [
 const BUDDY_LINES = [
   "thanks for stopping by ♡",
   "I'm Vivian's paper sidekick!",
-  "she's open to internships ✿",
   "ask her about agentic AI!",
   "the skills below are draggable ↓",
   "boop!",
