@@ -15,6 +15,7 @@ const PROJECTS = [
     ],
     tags: ["Lovable", "Google Gemini", "Supabase", "Prompt Engineering"],
     link: "",
+    color: "var(--pink-100)",
     art: "music",
   },
   {
@@ -30,6 +31,7 @@ const PROJECTS = [
     ],
     tags: ["QLoRA", "Llama 3.2", "Ollama", "Google Colab", "Kaggle"],
     link: "",
+    color: "var(--white)",
     art: "sparkle",
   },
   {
@@ -45,6 +47,7 @@ const PROJECTS = [
     ],
     tags: ["Python", "OOP"],
     link: "",
+    color: "var(--pink-200)",
     art: "cap",
   },
   {
@@ -60,6 +63,7 @@ const PROJECTS = [
     ],
     tags: ["HTML", "CSS", "JavaScript", "Dreamweaver"],
     link: "",
+    color: "var(--pink-50)",
     art: "flower",
   },
   {
@@ -75,6 +79,7 @@ const PROJECTS = [
     ],
     tags: ["Python", "CSV", "Data Analysis"],
     link: "",
+    color: "var(--white)",
     art: "chart",
   },
   {
@@ -90,6 +95,7 @@ const PROJECTS = [
     ],
     tags: ["MySQL", "ER Diagrams", "Database Design"],
     link: "",
+    color: "var(--pink-100)",
     art: "database",
   },
 ];
@@ -129,14 +135,17 @@ const artSvg = (key) => `<svg class="project-art" viewBox="0 0 120 120" aria-hid
 // ---------- Projects grid ----------
 const grid = document.getElementById("projectGrid");
 grid.innerHTML = PROJECTS.map((p, i) => {
+  const tilt = [-1.5, 1.2, -0.8, 1.6, -1.2, 0.9][i % 6];
   return `
-    <button class="project paper reveal" data-category="${p.categories.join(" ")}" data-index="${i}">
+    <button class="project paper reveal" data-category="${p.categories.join(" ")}" data-index="${i}"
+      style="--paper:${p.color}; --tilt:${tilt}deg">
+      <span class="tape tape-top"></span>
       ${artSvg(p.art)}
       <span>
         <span class="p-date">${p.date}</span>
         <span class="p-title">${p.title}</span>
         <span class="p-desc">${p.blurb}</span>
-        <span class="more">View details →</span>
+        <span class="more">peek inside →</span>
       </span>
     </button>`;
 }).join("");
@@ -168,7 +177,7 @@ grid.addEventListener("click", (e) => {
     <h3>${p.title}</h3>
     <div class="tags">${p.tags.map((t) => `<span>${t}</span>`).join("")}</div>
     <ul class="points">${p.points.map((pt) => `<li>${pt}</li>`).join("")}</ul>
-    ${p.link ? `<div><a class="btn btn-primary" href="${p.link}" target="_blank" rel="noopener">View project →</a></div>` : ""}`;
+    ${p.link ? `<div style="text-align:center"><a class="btn btn-primary" href="${p.link}" target="_blank" rel="noopener">View project →</a></div>` : ""}`;
   modal.showModal();
 });
 modal.querySelector(".modal-close").addEventListener("click", () => modal.close());
@@ -224,7 +233,6 @@ function heartBurst(x, y, n = 10) {
     const h = document.createElement("span");
     h.className = "heart-bit";
     h.textContent = ["♡", "♥", "✿", "✦"][i % 4];
-    h.style.color = i % 3 === 0 ? "var(--green)" : "var(--pink-500)";
     const a = (Math.PI * 2 * i) / n + Math.random() * 0.5;
     const d = 50 + Math.random() * 60;
     h.style.left = `${x}px`;
@@ -239,7 +247,7 @@ function heartBurst(x, y, n = 10) {
 
 // ---------- Draggable stickers ----------
 const board = document.getElementById("stickerBoard");
-const styles = ["", "s-pink", "", "s-green"];
+const styles = ["", "s-pink", "s-rose", "s-blush"];
 SKILLS.forEach((name, i) => {
   const s = document.createElement("div");
   s.className = `sticker ${styles[i % styles.length]}`;
